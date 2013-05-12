@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/currentDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/currentDataText"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_gravity="center" />
+        
+        <Button
+            android:id="@+id/beginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/beginButtonText"
+            android:width="400.0px"
+            android:height="200.0px"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:textSize="40sp" />
+
+        <Button
+            android:id="@+id/endButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/endButtonText"
+            android:width="400.0px"
+            android:height="200.0px"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:textSize="40sp" />
+    </LinearLayout>
+
+</LinearLayout>

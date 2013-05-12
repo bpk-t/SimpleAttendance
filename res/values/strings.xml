@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SimpleAttendance</string>
+
+    <string name="beginButtonText">入社</string>
+    <string name="endButtonText">退社</string>
+    
+    <string name="currentDataText">YYYY/MM/DD</string>
+</resources>
