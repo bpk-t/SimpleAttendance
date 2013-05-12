@@ -5,6 +5,7 @@
 
     <string name="beginButtonText">出社</string>
     <string name="endButtonText">退社</string>
+    <string name="fileOutputButtonText">ファイルへ出力</string>
     
     <string name="currentDataText">YYYY/MM/DD</string>
 </resources>
