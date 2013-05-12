@@ -83,36 +83,7 @@ public class SimpleAttendanceActivity extends Activity {
 				int year = current_.get(Calendar.YEAR);
 		        int monthOfYear = current_.get(Calendar.MONTH) + 1;
 		        int dayOfMonth = 1;
-				picker_ = new DatePickerDialog(SimpleAttendanceActivity.this,
-						new DatePickerDialog.OnDateSetListener() {
-							@Override
-							public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-								
-								SQLiteDatabase db = dbHelper_.getReadableDatabase();
-								
-								File file = getOutputFilePath(year, monthOfYear);
-								try {
-							        PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file, false),"UTF-8"));
-
-							        for (int i = dayOfMonth; i <= 31; ++i) {
-										String date_id = String.format("%1$04d/%2$02d/%3$02d", year, monthOfYear, i);
-										AttendanceRecord record = dbHelper_.serchByDayForAttendance(db, date_id);
-										
-										if (record != null) {
-											writer.append(date_id + "\t" + record.beginTime() + "\t" + record.endTime() + "\r\n");
-										} else {
-											writer.append(date_id + "\t" + "\r\n");
-										}
-									}
-							        writer.flush();
-							        writer.close();
-							    } catch (IOException e) {
-							        e.printStackTrace();
-							    }
-								Toast.makeText(SimpleAttendanceActivity.this, file.getAbsolutePath() + "‚É•Û‘¶‚µ‚Ü‚µ‚½", Toast.LENGTH_LONG).show();
-								db.close();
-							}
-						}, year, monthOfYear, dayOfMonth);
+				picker_ = new DatePickerDialog(SimpleAttendanceActivity.this, dataSetListener_, year, monthOfYear, dayOfMonth);
 				picker_.show();
 			}
 		});
@@ -155,6 +126,39 @@ public class SimpleAttendanceActivity extends Activity {
     		return "";
     	}
     }
+    
+    private DatePickerDialog.OnDateSetListener dataSetListener_ = new DatePickerDialog.OnDateSetListener() {
+    	/**
+    	 * o—Í‚·‚éŒŽ‚ð‘I‘ð‚³‚ê‚½‚Æ‚«‚ÉŒÄ‚Ño‚³‚ê‚é
+    	 */
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) 
+		{
+			SQLiteDatabase db = dbHelper_.getReadableDatabase();
+			
+			File file = getOutputFilePath(year, monthOfYear);
+			try {
+		        PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file, false),"UTF-8"));
+
+		        for (int i = dayOfMonth; i <= 31; ++i) {
+					String date_id = String.format("%1$04d/%2$02d/%3$02d", year, monthOfYear, i);
+					AttendanceRecord record = dbHelper_.serchByDayForAttendance(db, date_id);
+					
+					if (record != null) {
+						writer.append(date_id + "\t" + record.beginTime() + "\t" + record.endTime() + "\r\n");
+					} else {
+						writer.append(date_id + "\t" + "\r\n");
+					}
+				}
+		        writer.flush();
+		        writer.close();
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+			Toast.makeText(SimpleAttendanceActivity.this, file.getAbsolutePath() + "‚É•Û‘¶‚µ‚Ü‚µ‚½", Toast.LENGTH_LONG).show();
+			db.close();
+		}
+    };
     
     private Calendar current_ = null;
     private AttendanceDbHelper dbHelper_ = null;
