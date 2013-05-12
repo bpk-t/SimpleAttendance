@@ -1,6 +1,5 @@
 package com.gmail.kouh2501gis.util;
 
-import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -47,8 +46,7 @@ public class DataUtil {
      */
     static public String getDayForString(Calendar cal)
     {
-    	MessageFormat mf = new MessageFormat("{0,date,yyyy/MM/dd}");
-    	return mf.format(new Object[]{cal.getTime()});
+    	return kDayFormat.format(cal.getTime());
     }
     
     /**
@@ -58,7 +56,9 @@ public class DataUtil {
      */
     static public String getTimeForString(Date date)
     {
-    	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-    	return sdf.format(date);
+    	return kTimeFormat.format(date);
     }
+    
+    private static final SimpleDateFormat kTimeFormat = new SimpleDateFormat("HH:mm");
+    private static final SimpleDateFormat kDayFormat = new SimpleDateFormat("yyyy/MM/dd");
 }
